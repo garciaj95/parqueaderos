@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Persona extends Model
@@ -16,4 +17,9 @@ class Persona extends Model
         'nombres',
         'email'
     ];
+
+    public function vehiculos() : HasMany
+    {
+        return $this->hasMany(Vehiculo::class, 'propietario_id', 'identificacion');
+    }
 }

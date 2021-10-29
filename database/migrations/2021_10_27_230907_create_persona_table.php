@@ -17,7 +17,7 @@ class CreatePersonaTable extends Migration
             $table->id();
             $table->string('identificacion', 15)->unique();
             $table->string('nombres', 80);
-            $table->string('email', 80);
+            $table->string('email', 80)->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

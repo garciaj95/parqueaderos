@@ -99,4 +99,13 @@ class ModeloController extends Controller
     {
         return Modelo::destroy($id);
     }
+
+    public function getByMarca( Request $request )
+    {
+        $datos = $request->validate([
+            'marca_id' => 'required|integer'
+        ]);
+
+        return Modelo::where('marca_id', $datos['marca_id'])->get();
+    }
 }

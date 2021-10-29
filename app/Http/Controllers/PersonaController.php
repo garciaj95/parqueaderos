@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Persona;
 use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\DB;
 
 class PersonaController extends Controller
 {
@@ -34,7 +37,15 @@ class PersonaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validar = $request->validate([
+            'identificacion' => 'required|string|unique:'. Persona::class .',identificacion',
+            'nombres'        => 'required|string',
+            'email'          => 'required|email',
+        ]);
+
+        $persona = Persona::create( $validar );
+
+        return $persona;
     }
 
     /**
@@ -45,7 +56,9 @@ class PersonaController extends Controller
      */
     public function show($id)
     {
-        //
+        $persona = Persona::where('identificacion', $id)->first();
+
+        return $persona;
     }
 
     /**
@@ -68,7 +81,16 @@ class PersonaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validar = $request->validate([
+            'identificacion' => 'required|string|unique:'. Persona::class .',identificacion,'.$id,
+            'nombres'        => 'required|string',
+            'email'          => 'nullable|email',
+        ]);
+
+        $persona = Persona::find($id);
+        $persona->update( $validar );
+
+        return response()->json(['persona' => $persona]);
     }
 
     /**
@@ -80,5 +102,18 @@ class PersonaController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function listadoWithVehiculos()
+    {
+        $listado = Persona::with('vehiculos')->get();
+        /*
+        $listado = DB::table('persona')
+                    ->join('vehiculo', 'persona.identificacion', '=', 'vehiculo.propietario_id', 'left')
+                    ->select('*')
+                    ->get();
+                    */
+
+        return $listado;
     }
 }

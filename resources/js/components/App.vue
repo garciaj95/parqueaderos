@@ -6,6 +6,8 @@
                     <router-link to="/marcas" class="nav-item nav-link">Marcas</router-link>
                     <router-link to="/modelos" class="nav-item nav-link">Modelos</router-link>
                     <router-link to="/tipov" class="nav-item nav-link">Tipo Vehículos</router-link>
+                    <router-link to="/listado_propietarios" class="nav-item nav-link">Propietarios</router-link>
+                    <router-link to="/listado_vehiculos" class="nav-item nav-link">Buscar Vehículos</router-link>
                 </div>
             </div>
         </nav>

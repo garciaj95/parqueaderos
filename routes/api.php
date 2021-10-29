@@ -5,7 +5,9 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\MarcaController;
 use App\Http\Controllers\ModeloController;
+use App\Http\Controllers\PersonaController;
 use App\Http\Controllers\TipoVehiculoController;
+use App\Http\Controllers\VehiculoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,4 +24,12 @@ Route::middleware('api')->group(function () {
     Route::resource('marcas', MarcaController::class);
     Route::resource('modelos', ModeloController::class);
     Route::resource('tipos', TipoVehiculoController::class);
+    Route::resource('persona', PersonaController::class);
+    Route::resource('vehiculo', VehiculoController::class);
+
+    Route::get('listado-propietarios', [PersonaController::class, 'listadoWithVehiculos']);
+    Route::post('busca-vehiculos', [VehiculoController::class, 'buscaVehiculos']);
+
+    Route::get('vehiculos-by-marca', [VehiculoController::class, 'buscaVehiculosByMarca']);
+
 });

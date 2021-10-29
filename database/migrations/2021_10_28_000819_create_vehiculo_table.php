@@ -19,8 +19,8 @@ class CreateVehiculoTable extends Migration
             $table->integer('modelo_id')->unsigned();
             $table->integer('tipo_id')->unsigned();
             $table->integer('anio');
-            $table->string('color', 50);
-            $table->string('detalle', 300);
+            $table->string('color', 50)->nullable();
+            $table->string('detalle', 300)->nullable();
             $table->string('propietario_id', 15)->default(NULL);
             $table->softDeletes();
             $table->timestamps();
